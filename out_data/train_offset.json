@@ -3,14 +3,14 @@
     "particle_type": {
       "offset": 0,
       "shape": [
-        1177
+        393
       ]
     },
     "position": {
       "offset": 0,
       "shape": [
-        70,
-        1177,
+        1000,
+        393,
         2
       ]
     }
