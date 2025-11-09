@@ -1,0 +1,18 @@
+{
+  "0": {
+    "particle_type": {
+      "offset": 0,
+      "shape": [
+        1177
+      ]
+    },
+    "position": {
+      "offset": 0,
+      "shape": [
+        70,
+        1177,
+        2
+      ]
+    }
+  }
+}
