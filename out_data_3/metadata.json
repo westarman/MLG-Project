@@ -1,0 +1,34 @@
+{
+  "bounds": [
+    [
+      0.026890357956290245,
+      0.9597315192222595
+    ],
+    [
+      0.026061927899718285,
+      0.9569275379180908
+    ]
+  ],
+  "sequence_length": 70,
+  "default_connectivity_radius": 0.015,
+  "dim": 2,
+  "dt": 0.008,
+  "vel_mean": [
+    -0.049740519149818134,
+    -1.2819402706691962
+  ],
+  "vel_std": [
+    2.5490052443565205,
+    3.739262472490743
+  ],
+  "acc_mean": [
+    -0.04205757575936743,
+    1.6387951942335752
+  ],
+  "acc_std": [
+    154.64252548206835,
+    230.16377675443488
+  ],
+  "num_sims": 3,
+  "note": "Multiple sims concatenated; binaries appended per sim; see train_offset.json for per-group offsets and params."
+}
