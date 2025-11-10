@@ -1,0 +1,3 @@
+Tuki noter damo vse kar smo sprobali, rabi tudi kodo
+ - vse različne metode generiranja
+ - različni modeli 
