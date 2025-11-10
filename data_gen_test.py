@@ -1,4 +1,3 @@
-#requires taichi_elements (github)
 import os
 import json
 import taichi as ti
@@ -28,9 +27,11 @@ if args.save_data:
 # ------------------------
 # Simulation parameters
 # ------------------------
+# frames - 1000, less particles - 482 particles (we have 1100), 
+
 res = (70, 70)
 dt = 8e-3
-n_frames = 70
+n_frames = 1000#70
 
 
 # Make the simulation domain a bit smaller (smaller boundary box)
@@ -42,7 +43,9 @@ mpm = MPMSolver(res=res) #, size=0.8
 mpm.add_cube(lower_corner=[0.3, 0.7],   # top-left position
              cube_size=[0.2, 0.2],      # width x height
              material=MPMSolver.material_water,
-             sample_density=6) 
+             sample_density=2) 
+
+print("Number of particles:", mpm.n_particles)
 
 # ------------------------
 # GUI
@@ -69,7 +72,7 @@ gui.circles(particles['position'],
            radius=2.5,
            color=colors[particles['material']])
 gui.show()
-time.sleep(10)  # wait 10 seconds to allow for window capture
+#time.sleep(10)  # wait 10 seconds to allow for window capture
 
 for frame in range(n_frames):
     mpm.step(dt)
@@ -140,7 +143,7 @@ if args.save_data:
             n_group = indices.size
 
             # Particle types for this group
-            ptypes = materials0[indices].astype(np.int32)
+            ptypes = materials0[indices].astype(np.int64)
             particle_type_blobs.append(ptypes)
 
             # Positions for this group: shape (n_frames, n_group, dim)
@@ -155,19 +158,19 @@ if args.save_data:
             part_type_offset += n_group
             pos_element_offset += int(n_frames_saved) * n_group * dim
 
-        # Write metadata and offset files
+        
         with open(os.path.join(args.out_dir, 'metadata.json'), 'w') as f:
             json.dump(metadata, f, indent=2)
-        with open(os.path.join(args.out_dir, 'offset.json'), 'w') as f:
+        with open(os.path.join(args.out_dir, 'train_offset.json'), 'w') as f:
             json.dump(offset, f, indent=2)
 
-        # Write binary data files
-        with open(os.path.join(args.out_dir, 'particle_type.dat'), 'wb') as f:
+        
+        with open(os.path.join(args.out_dir, 'train_particle_type.dat'), 'wb') as f:
             for arr in particle_type_blobs:
                 arr.tofile(f)
-        with open(os.path.join(args.out_dir, 'position.dat'), 'wb') as f:
+        with open(os.path.join(args.out_dir, 'train_position.dat'), 'wb') as f:
             for arr in position_blobs:
                 arr.tofile(f)
 
         print(f"Saved data to {args.out_dir}/")
-        print("Files: metadata.json, offset.json, particle_type.dat, position.dat")
+        print("Files: metadata.json, train_offset.json, train_particle_type.dat, train_position.dat")
