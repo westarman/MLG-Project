@@ -6,17 +6,45 @@ This repo is for our CS224W project — using Graph Neural Networks to simulate 
 
 We are using Taichi Elements (https://github.com/taichi-dev/taichi_elements - required for running the code) to generate the datasets. 
 
-The simulation runs multiple times, with varying initial parameters and the resaults are saved for training the model
+The simulation is executed multiple times using varying initial parameters, and the resulting data is stored for model training.
+
+## Model 
+### Simple 3-layer MLP
+#### Data construction  
+
+- Builds training pairs by concatenating positions at 
+t−2 and 
+t−1.
+
+- Target is the position at time 
+t.
+
+- Outputs flattened sample tensors, shuffled and split 90 / 10 into train / valid sets.
+
+#### Model
+
+- Input: concatenated [xt−2, xt−1].
+
+- Two hidden layers of 64 units with ReLU.
+
+- Output predicts next position xt.
+
+#### Training
+
+- Optimized with Adam (3e-4) and MSE loss.
+
+- Standard train / eval loop over 5 epochs, reporting average train and validation MSE each epoch.
+
+### GNS
+GNS is currently still in progress.
 
 ## How to use our project
 
-Open project.ipynb   
+Open project.ipynb and run the cells.  
 
-Run the cells  
-
-If you want to run smaller datasets, please do this:  
+> If you want to run smaller datasets, please do this.
 Generate data and add it to folder temp/datasets/WaterDropNase. You should have a folder structure like this:  
-<img width="258" height="259" alt="image" src="https://github.com/user-attachments/assets/10012efb-4012-4b8e-bf26-50f37e4ccc96" />. 
+<img width="258" height="259" alt="image" src="https://github.com/user-attachments/assets/10012efb-4012-4b8e-bf26-50f37e4ccc96" />
 
 💡 If you are time / space limited, you can skip test data for now and just copy the train data and rename it to valid.
 
