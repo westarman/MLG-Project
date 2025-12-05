@@ -1,0 +1,49 @@
+GGO > Krajevne enote > GGE > Revirji > Odseki > Sestoji
+(GGE je pred Krajevno enoto, čeprf je manjši??)
+
+
+PODATKI IZ PREGLEDOVALNIKA
+Na nivoju Odseka:
+    -ggo
+    -krajevna enota
+    -gge
+    -revir
+    -gojitveni razred ggo
+    -gojitveni razred gge
+    -kategorija gozda
+    -povrsina[ha]
+    -pozarna ogrozenost
+    -ohranjenost gozda
+    -polozaj pokrajine
+    -intenzivnost gospodarjenja
+    -(vezani ogljik, letni ponor ogljika)
+    -nadmorska višina (min in max)
+    -kamnina
+    -delež kamnitosti[%]
+    -delež skalovitosti[%]
+    -nagib[˚]
+    -odprtost[%]
+    -odprtost za gurs??? <- kj je to? (čuje se pomembno)
+    -relief
+    -lega
+
+Na nivoju Sestoja:
+    -odsek
+    -povrsina[ha]
+    -razvojna faza
+    -gojitvena smer
+    -zasnova
+    -sklep
+    -negovanost
+    -površina pomladka[ha]
+    -pomladek zasnova
+    -sestava gozda
+    (jelke[%],bukve[%],mehki listavci[%]...)
+    -zaloga iglavcev [m^3]
+    -zaloga listavcev[m]
+    -posek iglavcev <- naš prediction
+    -posek listavcev <- naš prediction
+
+Dodamo še sosednost:
+    -sosednji k-sestoji (najverjetnje bo max k=2-3 in bo treba embedding nrdit iz njihovih tabel)
+    -(mogoč dodamo sosednost na nivoju odseka in celo revirja, za gge je pa njbrz ze overkill)
