@@ -47,3 +47,10 @@ Na nivoju Sestoja:
 Dodamo še sosednost:
     -sosednji k-sestoji (najverjetnje bo max k=2-3 in bo treba embedding nrdit iz njihovih tabel)
     -(mogoč dodamo sosednost na nivoju odseka in celo revirja, za gge je pa njbrz ze overkill)
+
+
+DB processing:
+    1) load sestoji layer into QGIS from WFS in Pregledovalnik
+    2) we use REFACTOR from the toolbox to isolate sestoji identifiers
+    3) we use JOIN ATTR. BY LOCATION from toolbox on the identifiers layer (touches)
+    4) in sqlite browser we open the db with the joined layer and create new nodes, edges, isolate nodes, tables (remember to delete self edges!)
