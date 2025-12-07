@@ -7,6 +7,8 @@ Naš glavni cilj bo zgraditi RDL model, ki bo na podlagi meta podatkov odsekov z
 
 Website: [Pregledovalnik podatkov o gozdovih](https://prostor.zgs.gov.si/pregledovalnik/)
 
+Small testing DB with 1 revir ("RESA") is included in /datasets. It contains an edges and nodes tables, as well as their coresponding attribute tables.  
+
 Full raw dataset encompassing the entire country:
 
 - [50k_all_odseki.sqlite](https://drive.google.com/file/d/1-k_Y9iBYT9Aj8qa6Ns19J-wyWem4eqIh/view?usp=drive_link) (290mb)
@@ -103,7 +105,7 @@ ___
 
 ## TODO:
 - [X] ~~vsaka enota ma tut GEOMETRY property, treba nardit pretvorbo, da iz tega smiselno  dobimo sosednost~~
-- [X] ~kakšna bo ta sosednost, kajti sestoji so različnih oblik. Se  bo upoštevalo distance, center, border? Treba pomislit in raziskat~ 
+- [X] ~~kakšna bo ta sosednost, kajti sestoji so različnih oblik. Se  bo upoštevalo distance, center, border? Treba pomislit in raziskat~~ 
 - [ ] določit sosednji k-sestoji embedding (najverjetnje bo max k=2-3 in bo treba embedding nrdit iz njihovih tabel)
 - [ ] preveri kolko on average vrednost k (k-sosednost) zajema skupno površino sestojev [ha]
 - [ ] mogoč dodamo sosednost na nivoju odseka in celo revirja (za gge je pa njbrz ze overkill)
