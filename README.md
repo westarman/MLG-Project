@@ -9,8 +9,8 @@ Website: [Pregledovalnik podatkov o gozdovih](https://prostor.zgs.gov.si/pregled
 
 Full raw dataset encompassing the entire country:
 
-- (290mb)[50k_all_odseki.sqlite](https://drive.google.com/file/d/1-k_Y9iBYT9Aj8qa6Ns19J-wyWem4eqIh/view?usp=drive_link) (290mb)
-- (673mb)[350k_all_sestoji.sqlite](https://drive.google.com/file/d/1B5DAeCr2gHqvvHo4pdXN9eu8m2iEm7Vg/view?usp=drive_link) (673mb)
+- [50k_all_odseki.sqlite](https://drive.google.com/file/d/1-k_Y9iBYT9Aj8qa6Ns19J-wyWem4eqIh/view?usp=drive_link) (290mb)
+- [350k_all_sestoji.sqlite](https://drive.google.com/file/d/1B5DAeCr2gHqvvHo4pdXN9eu8m2iEm7Vg/view?usp=drive_link) (673mb)
 
 
 Hierarhija enot:  
@@ -78,13 +78,13 @@ ___
 
 Iz geometrijskih podatkov smo sestavli border-based sosednost sestojev. Unikatno so identificirani po šifri(node_id) -> CONCAT(ggo,odsek,sestoj) ali po ID(id), ki je označen povrsti od 0 do N-1.
 
-Sosednost DB(5.1GB): [adjacency_db](https://drive.google.com/file/d/1CYLelPeP2p0VUPWXUh00pLzenra5a7_b/view?usp=drive_link)
+Sosednost DB(5.1GB): [adjacency_db.sqlite](https://drive.google.com/file/d/1CYLelPeP2p0VUPWXUh00pLzenra5a7_b/view?usp=drive_link)
 
 Vsebuje  4 tabele:
-- **joined layer** <- raw edge podatki (za debugging)
-- **nodes** <- 347.338 sestojev z node_id in id (vključuje ***isolated nodes***)
-- **isolated nodes** <- 4.871 izoliranih sestojev, ki so brez edges
-- **edges** <- 1.877.718 directional povezav med sestoji s šifro in indexi (node1,node2, n1_id,n2_id)
+- **joined_layer**  <--  raw edge podatki (za debugging)
+- **nodes**  <--  347.338 sestojev z node_id in id (vključuje ***isolated_nodes***)
+- **isolated_nodes**   <--  4.871 izoliranih sestojev, ki so brez edges
+- **edges**  <--  1.877.718 directional povezav med sestoji s šifro in indexi (node1,node2, n1_id,n2_id)
 - ostale tabele v DB so brez predmetne
 
 ![Prikaz k-sosednosti](docs/prikaz_sosednosti_v0.png)
@@ -97,15 +97,17 @@ Potrebno bo pretvorit podatke v smiselno relacijsko bazo:
 ![Primer sheme](docs/shema_v2.png)
 
 ## RDL-MODEL
-Treba sestavit arhitekturo...
+Treba sestavit arhitekturo...  
 
-### TODO:
-- [X] vsaka enota ma tut GEOMETRY property, treba nardit pretvorbo, da iz tega smiselno  dobimo sosednost
-- [X] kakšna bo ta sosednost, kajti sestoji so različnih oblik. Se  bo upoštevalo distance, center, border? Treba pomislit in raziskat 
+___
+
+## TODO:
+- [X] ~~vsaka enota ma tut GEOMETRY property, treba nardit pretvorbo, da iz tega smiselno  dobimo sosednost~~
+- [X] ~kakšna bo ta sosednost, kajti sestoji so različnih oblik. Se  bo upoštevalo distance, center, border? Treba pomislit in raziskat~ 
 - [ ] določit sosednji k-sestoji embedding (najverjetnje bo max k=2-3 in bo treba embedding nrdit iz njihovih tabel)
 - [ ] preveri kolko on average vrednost k (k-sosednost) zajema skupno površino sestojev [ha]
 - [ ] mogoč dodamo sosednost na nivoju odseka in celo revirja (za gge je pa njbrz ze overkill)
 - [ ] med sloji, bi enote na višjem nivoju lahko delovale kot super node nižjim enotam?
-- [ ] iz raw DBja je treba primerno pripravit podatke, to bo odvisno od modela, ki ga bomo uporabli in relacijske sheme
+- [ ] iz raw DBja je treba primerno pripravit podatke, to bo odvisno od relacijske sheme ter modela, ki ga bomo uporabli
 - [ ] dobro bi blo tut vključit podatke območij z lubadrajem, vetrolomom, požarom... Te podatki so very scattered za različna časovna obdobja, treba si pogledat če se da to uporabit iz geometrijskih podatkov
 - [ ] treba raziskat kateri model bi bil najbolj učinkovit za naš problem, sj njbrž bo njbulš, da več različnih modelov nrdimo z modifikacijami
