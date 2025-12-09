@@ -1,27 +1,37 @@
-# ZGS PROJEKT ZA OCENITEV POSEKA IN DRUGIH ATRIBUTOV GOZDA
+# Sustainable Forestry Planning with Graph Neural Networks
 
-Naš glavni cilj bo zgraditi RDL model, ki bo na podlagi meta podatkov odsekov za sestoje ter strukture k-sosednih sestojev lahko sam napovedal določene atribute sestojev. Model bo tako lahko prispeval k učinkovitejši in bolj konsistentni pripravi prihodnjih gozdno gospodarskih načrtov.
+Naš glavni cilj bo zgraditi GNN model, ki bo na podlagi meta podatkov odsekov za sestoje ter strukture k-sosednih sestojev lahko sam napovedal določene atribute sestojev. Model bo tako lahko prispeval k učinkovitejši in bolj konsistentni pripravi prihodnjih gozdno gospodarskih načrtov.
 
 
-## PODATKI IZ PREGLEDOVALNIKA
+## Dataset:
 
-Website: [Pregledovalnik podatkov o gozdovih](https://prostor.zgs.gov.si/pregledovalnik/)
+Website: [Pregledovalnik podatkov o gozdovih](https://prostor.zgs.gov.si/pregledovalnik/) 
 
-Small testing DB with 1 revir ("RESA") is included in /datasets. It contains an edges and nodes tables, as well as their coresponding attribute tables.  
-
-Full raw dataset encompassing the entire country:
+Full raw dataset encompassing the entire country:  
 
 - [50k_all_odseki.sqlite](https://drive.google.com/file/d/1-k_Y9iBYT9Aj8qa6Ns19J-wyWem4eqIh/view?usp=drive_link) (290mb)
 - [350k_all_sestoji.sqlite](https://drive.google.com/file/d/1B5DAeCr2gHqvvHo4pdXN9eu8m2iEm7Vg/view?usp=drive_link) (673mb)
 
 
-Hierarhija enot:  
+Parsed and pre-processed dataset, ready for GNN training:  
+
+[forest_db.sqlite](https://drive.google.com/file/d/1f3VSCSu_NWmmrRq_ExB0XNmTrIZOsHQU/view?usp=drive_link)(2.45gb)
+
+It includes 5 tables:  
+- **nodes** <-- 347.338 nodes with their id name and index 
+- **edges** <-- an edge list containing 1.877.718 directed edges
+- **isolated_nodes** <-- a list of 4.871 nodes that have no edges
+- **sestoji_attr** <-- attribute table for each node
+- **odseki_attr** <-- 53.403 regional node attributes
+
+
+Forest unit heirarchy:  
 GGO > Krajevne enote > GGE > Revirji > Odseki > Sestoji
 
-Trenutno stanje podatkov v bazi:
+State of the raw dataset before pre-processing:
 ![DB Data](docs/current_db_shema.png)
 
-### Odsek:
+### Odsek (Regional attributes):
 
 | Attribute | Description |
 |-----------|-------------|
@@ -36,20 +46,24 @@ Trenutno stanje podatkov v bazi:
 | kategorija gozda | … |
 | ohranjenost gozda | … |
 | polozaj pokrajine | … |
-| pozarna ogrozenost | … |
-| intenzivnost gospodarjenja | … |
-| (vezani ogljik, letni ponor ogljika) | mogoče relevantno mogoče ne? |
+| relief | … |
+| lega | nagib glede na kardinalno smer (S, J, V, Z, SZ, JV...) |
+| nagib[˚] | naklon terena |
 | nadm. višina[m] (min,max) | … |
 | kamnina | apnenec, dolomit, fliš, diluvialna ilovica, morena karbonatna... |
 | delež kamnitosti[%] | delež kamnine, ki je označen zgoraj (preveri) |
 | delež skalovitosti[%] | delež skalovja, ki pokriva tla |
-| nagib[˚] | … |
+| tarife drevesnih vrst[%] | kakovost dreves oz. nek rank |
 | odprtost[%] | odprtost zaradi vlak (vlaka = gozdna "cesta") |
 | odprtost za gurs | to baje vključuje odprtost zarad vlak in cest nasplošno (preveri) |
-| relief | … |
-| lega | nagib glede na kardinalno smer (S, J, V, Z, SZ, JV...) |
+| pozarna ogrozenost | … |
+| intenzivnost gospodarjenja | … |
+| rastiščni tip | … |
+| rastiščni koeficient | … |
+| (vezani ogljik, letni ponor ogljika) | mogoče relevantno mogoče ne? |
 
-### Sestoj:
+
+### Sestoj (Node attributes):
 
 | Attribute | Description |
 |-----------|-------------|
@@ -78,16 +92,7 @@ ___
 
 ### Sosednost sestojev:
 
-Iz geometrijskih podatkov smo sestavli border-based sosednost sestojev. Unikatno so identificirani po šifri(node_id) -> CONCAT(ggo,odsek,sestoj) ali po ID(id), ki je označen povrsti od 0 do N-1.
-
-Sosednost DB(5.1GB): [adjacency_db.sqlite](https://drive.google.com/file/d/1CYLelPeP2p0VUPWXUh00pLzenra5a7_b/view?usp=drive_link)
-
-Vsebuje  4 tabele:
-- **joined_layer**  <--  raw edge podatki (za debugging)
-- **nodes**  <--  347.338 sestojev z node_id in id (vključuje ***isolated_nodes***)
-- **isolated_nodes**   <--  4.871 izoliranih sestojev, ki so brez edges
-- **edges**  <--  1.877.718 directional povezav med sestoji s šifro in indexi (node1,node2, n1_id,n2_id)
-- ostale tabele v DB so brez predmetne
+From geometric data we were able to construct a border based neighborhood for every node. They are uniquely identified by their string id (node_id) or their index (id) in the parsed dataset.
 
 ![Prikaz k-sosednosti](docs/prikaz_sosednosti_v0.png)
 
@@ -97,19 +102,25 @@ Potrebno bo pretvorit podatke v smiselno relacijsko bazo:
 (To ni končna verzija, definitivno je treba jo dodelat mankajo tarife...)
 
 ![Primer sheme](docs/shema_v2.png)
+  
 
-## RDL-MODEL
-Treba sestavit arhitekturo...  
+## Model Architecture:
+We will most likely develop GraphSAGE and GAT.  
 
-___
+___  
 
 ## TODO:
 - [X] ~~vsaka enota ma tut GEOMETRY property, treba nardit pretvorbo, da iz tega smiselno  dobimo sosednost~~
 - [X] ~~kakšna bo ta sosednost, kajti sestoji so različnih oblik. Se  bo upoštevalo distance, center, border? Treba pomislit in raziskat~~ 
+- [ ] lahko bi dodali edge weight based na length of the border med sestoji(GAT)
 - [ ] določit sosednji k-sestoji embedding (najverjetnje bo max k=2-3 in bo treba embedding nrdit iz njihovih tabel)
 - [ ] preveri kolko on average vrednost k (k-sosednost) zajema skupno površino sestojev [ha]
 - [ ] mogoč dodamo sosednost na nivoju odseka in celo revirja (za gge je pa njbrz ze overkill)
-- [ ] med sloji, bi enote na višjem nivoju lahko delovale kot super node nižjim enotam?
-- [ ] iz raw DBja je treba primerno pripravit podatke, to bo odvisno od relacijske sheme ter modela, ki ga bomo uporabli
-- [ ] dobro bi blo tut vključit podatke območij z lubadrajem, vetrolomom, požarom... Te podatki so very scattered za različna časovna obdobja, treba si pogledat če se da to uporabit iz geometrijskih podatkov
-- [ ] treba raziskat kateri model bi bil najbolj učinkovit za naš problem, sj njbrž bo njbulš, da več različnih modelov nrdimo z modifikacijami
+- [ ] med sloji, bi enote na višjem nivoju lahko delovale kot super node nižjim enotam? al samo dodamo regional atribute kot dodaten node embedding?
+- [ ] potrebno je izločit faulty podatke iz baze (negativne vrednosti, nemogoči sestoji...), za to sem že dodal db_fix_v0.sql file
+- [X] ~~iz raw DBja je treba primerno pripravit podatke, to bo odvisno od relacijske sheme ter modela, ki ga bomo uporabli~~
+- [ ] splitamo DB na train,valid,test set (njbrz bomo po 396 revirjih splital: 75-12.5-12.5 --> 296-50-50)
+- [ ] simpl python code za different seed splitanje DB-ja (po revirih, pa morda se po odsekih/revirih)
+- [ ] dobro bi blo tut vključit podatke območij z lubadarjem, vetrolomom, požarom... Te podatki so very scattered za različna časovna obdobja, treba si pogledat če se da to uporabit iz geometrijskih podatkov
+- [X] ~~treba raziskat kateri model bi bil najbolj učinkovit za naš problem, sj njbrž bo njbulš, da več različnih modelov nrdimo z modifikacijami~~
+- [ ] sestavit je treba basic modela za GraphSAGE in GAT (al pa kerga druzga)
