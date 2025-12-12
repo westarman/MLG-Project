@@ -40,7 +40,7 @@ pompov > 0 AND
  lzskdv39_m + lzskdv41_m +
  lzskdv50_m + lzskdv60_m +
  lzskdv70_m + lzskdv80_m < 1) OR -- imamo površino mladja, za njih pa ni deleža (557)
-etsku/povrsina > 400 -- obsežen posek po m^3/ha (748) <-- če je pravilno pol wow °o°, ko Švedi in Kanadčani...
+povrsina > 5 AND etsku/povrsina > 400 -- obsežen posek po m^3/ha (748) <-- če je pravilno pol wow °o°, ko Švedi in Kanadčani...
 
 --(sksmerni_naziv LIKE 'nega debeljaka%' AND sklep_naziv LIKE 'rahel%') OR -- NEGA DEBELJAKA in RAHEL sklep (14247) <-- nism čist prepričan da je napaka, njbrž je kak razlog
 

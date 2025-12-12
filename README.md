@@ -10,12 +10,13 @@ Website: [Pregledovalnik podatkov o gozdovih](https://prostor.zgs.gov.si/pregled
 Full raw dataset encompassing the entire country:  
 
 - [50k_all_odseki.sqlite](https://drive.google.com/file/d/1-k_Y9iBYT9Aj8qa6Ns19J-wyWem4eqIh/view?usp=drive_link) (290mb)
-- [350k_all_sestoji.sqlite](https://drive.google.com/file/d/1B5DAeCr2gHqvvHo4pdXN9eu8m2iEm7Vg/view?usp=drive_link) (673mb)
+- [350k_all_sestoji.sqlite](https://drive.google.com/file/d/1B5DAeCr2gHqvvHo4pdXN9eu8m2iEm7Vg/view?usp=drive_link) (673mb)  
+
 
 
 Parsed and pre-processed dataset, ready for GNN training:  
 
-[forest_db.sqlite](https://drive.google.com/file/d/1f3VSCSu_NWmmrRq_ExB0XNmTrIZOsHQU/view?usp=drive_link)(2.45gb)
+[forest_db.sqlite](https://drive.google.com/file/d/1f3VSCSu_NWmmrRq_ExB0XNmTrIZOsHQU/view?usp=drive_link) (2.45gb)
 
 It includes 5 tables:  
 - **nodes** <-- 347.338 nodes with their id name and index 
@@ -25,13 +26,14 @@ It includes 5 tables:
 - **odseki_attr** <-- 53.403 regional node attributes
 
 
-Forest unit heirarchy:  
+Forest unit hierarchy:  
 GGO > Krajevne enote > GGE > Revirji > Odseki > Sestoji
 
 State of the raw dataset before pre-processing:
 ![DB Data](docs/current_db_shema.png)
 
-### Odsek (Regional attributes):
+### Odsek (Regional attributes):  
+    [ ] - represents the number of categories, or the unit of measurement used for the attribute  
 
 | Attribute | Description |
 |-----------|-------------|
@@ -40,26 +42,26 @@ State of the raw dataset before pre-processing:
 | gge | gozdno gospodarksa enota |
 | revir | … |
 | odsek | … |
-| povrsina[ha] | … |
-| gojitveni razred ggo | … |
-| gojitveni razred gge | … |
-| kategorija gozda | … |
-| ohranjenost gozda | … |
-| polozaj pokrajine | … |
-| relief | … |
-| lega | nagib glede na kardinalno smer (S, J, V, Z, SZ, JV...) |
-| nagib[˚] | naklon terena |
-| nadm. višina[m] (min,max) | … |
-| kamnina | apnenec, dolomit, fliš, diluvialna ilovica, morena karbonatna... |
+| povrsina[ha] | area in hectars |
+| gojitveni razred ggo [125] | needs to be double checked and IDs to be fixed |
+| gojitveni razred gge [455] | this one needs serious clean up as well as ID fixes |
+| kategorija gozda [4] | needs only the 0-th index |
+| ohranjenost gozda [4] | needs only the 0-th index |
+| polozaj pokrajine [4] | needs only the 0-th index |
+| relief [9] | needs only the 0-th index |
+| lega [9] | cardinal direction of the slope (S, J, V, Z, SZ, JV...) |
+| nagib[˚] | steepness |
+| nadm. višina[m] (min,max) | min and max altitude |
+| kamnina [39] | 0th fix - apnenec, dolomit, fliš, diluvialna ilovica... |
 | delež kamnitosti[%] | delež kamnine, ki je označen zgoraj (preveri) |
 | delež skalovitosti[%] | delež skalovja, ki pokriva tla |
 | tarife drevesnih vrst[%] | kakovost dreves oz. nek rank |
 | odprtost[%] | odprtost zaradi vlak (vlaka = gozdna "cesta") |
 | odprtost za gurs | to baje vključuje odprtost zarad vlak in cest nasplošno (preveri) |
-| pozarna ogrozenost | … |
-| intenzivnost gospodarjenja | … |
-| rastiščni tip | … |
-| rastiščni koeficient | … |
+| pozarna ogrozenost [5] | needs only the 0-th index |
+| intenzivnost gospodarjenja [6] | small-intensity, medium-intensity... |
+| rastiščni tip [129] | needs serious clean up as well as ID fixes |
+| rastiščni koeficient | check what this value means |
 | (vezani ogljik, letni ponor ogljika) | mogoče relevantno mogoče ne? |
 
 
@@ -67,21 +69,21 @@ State of the raw dataset before pre-processing:
 
 | Attribute | Description |
 |-----------|-------------|
-| odsek | … |
-| sestoj | … |
-| povrsina[ha] | … |
-| razvojna faza | … |
-| gojitvena smer | … |
-| zasnova | … |
-| sklep | … |
-| negovanost | … |
-| površina pomladka[ha] | … |
-| pomladek zasnova | … |
+| odsek | regional attribute identifier |
+| sestoj | smallest forest unit, the node itself |
+| povrsina [ha] | area of the forest unit |
+| razvojna faza [11] | … |
+| gojitvena smer [21] | … |
+| zasnova [5] | … |
+| sklep [6] | … |
+| negovanost [5] | … |
+| površina pomladka [ha] | … |
+| pomladek zasnova [5] | … |
 | sestava gozda | jelke[%], bukve[%], mehki listavci[%] … |
 | zaloga iglavcev [m^3] | trenutna zaloga iglavcev v sestoju |
-| zaloga listavcev[m^3] | trenutna zaloga listavcev v sestoju |
-| posek iglavcev | naš prediction! |
-| posek listavcev | naš prediction! |
+| zaloga listavcev [m^3] | trenutna zaloga listavcev v sestoju |
+| posek iglavcev | naš prediction! 0-15000 |
+| posek listavcev | naš prediction! 0-15000 |
 
 
 Večina teh podatkov so vnaprej določeni pred sestavo načrta, bom še dodatno preveril vsakega. Za zdaj predpostavimo, da so vsi znani in je posek_iglavcev, posek_listavcev res zadnji določen v načrtu.
@@ -112,15 +114,18 @@ ___
 ## TODO:
 - [X] ~~vsaka enota ma tut GEOMETRY property, treba nardit pretvorbo, da iz tega smiselno  dobimo sosednost~~
 - [X] ~~kakšna bo ta sosednost, kajti sestoji so različnih oblik. Se  bo upoštevalo distance, center, border? Treba pomislit in raziskat~~ 
-- [ ] lahko bi dodali edge weight based na length of the border med sestoji(GAT)
-- [ ] določit sosednji k-sestoji embedding (najverjetnje bo max k=2-3 in bo treba embedding nrdit iz njihovih tabel)
+- [ ] lahko bi dodali edge weight based na length of the border med sestoji (GAT)
+- [X] ~~določit sosednji k-sestoji embedding (najverjetnje bo max k=2-3 in bo treba embedding nrdit iz njihovih tabel)~~
 - [ ] preveri kolko on average vrednost k (k-sosednost) zajema skupno površino sestojev [ha]
 - [ ] mogoč dodamo sosednost na nivoju odseka in celo revirja (za gge je pa njbrz ze overkill)
-- [ ] med sloji, bi enote na višjem nivoju lahko delovale kot super node nižjim enotam? al samo dodamo regional atribute kot dodaten node embedding?
+- [ ] med sloji, bi enote na višjem nivoju lahko delovale kot super node nižjim enotam? al samo dodamo regional atribute kot dodaten node embedding? reku je prof nj oboje sprobamo
 - [ ] potrebno je izločit faulty podatke iz baze (negativne vrednosti, nemogoči sestoji...), za to sem že dodal db_fix_v0.sql file
+- [ ] lahko tut eksperimentiramo da ene atribute spustimo in jih ne uporabimo, mogoče bo bolši?
 - [X] ~~iz raw DBja je treba primerno pripravit podatke, to bo odvisno od relacijske sheme ter modela, ki ga bomo uporabli~~
 - [ ] splitamo DB na train,valid,test set (njbrz bomo po 396 revirjih splital: 75-12.5-12.5 --> 296-50-50)
 - [ ] simpl python code za different seed splitanje DB-ja (po revirih, pa morda se po odsekih/revirih)
 - [ ] dobro bi blo tut vključit podatke območij z lubadarjem, vetrolomom, požarom... Te podatki so very scattered za različna časovna obdobja, treba si pogledat če se da to uporabit iz geometrijskih podatkov
 - [X] ~~treba raziskat kateri model bi bil najbolj učinkovit za naš problem, sj njbrž bo njbulš, da več različnih modelov nrdimo z modifikacijami~~
-- [ ] sestavit je treba basic modela za GraphSAGE in GAT (al pa kerga druzga)
+- [X] ~~basic model GraphSAGE~~ 
+- [ ] dodelaj GraphSAGE, da vključi sestavo gozda in attribute odsekov
+- [ ] basic model GAT (al pa kerga druzga)

@@ -1,0 +1,102 @@
+[number of layers | hidden dimensions | dropout probability] 
+[learning rate | attribute dimensions | total attribute dimensions]
+
+5 numeric attributes
+6 categorical attributes
+100 epochs - adam
+!-lower learning rate benefits from more epochs
+
+-Learning Rate-
+[2, 64, 0]
+[0.01, 8, 64]
+Test MAE: 84.44 (81.90%)
+6m33s (cpu)
+
+[2, 64, 0]
+[0.025, 8, 64]
+Test MAE: 83.48 (80.90%)
+6m29s (cpu)
+
+[2, 64, 0]
+[0.05, 8, 64]
+Test MAE: 70.09 (68.14%)
+6m30s (cpu)
+
+[2, 64, 0]
+[0.1, 8, 64]
+Test MAE: 71.28 (69.24%)
+6m7s (cpu)
+
+[2, 64, 0]
+[0.2, 8, 64]
+Test MAE: 75.92 (73.37%)
+6m29s (cpu)
+
+-Layers-
+[3, 64, 0]
+[0.05, 8, 64]
+Test MAE: 79.87 (77.22%)
+9m48s (cpu)
+
+[4, 32, 0]
+[0.05, 1, 8]
+Test MAE: 85.49 (82.46%)
+4m42s (cpu)
+
+[1, 64, 0]
+[0.05, 1, 8]
+Test MAE: 75.11 (72.30%)
+1m25s (cpu)
+
+[3, 64, 0.05]
+[0.05, 2, 16]
+Test MAE: 80.11 (78.64%)
+8m19s (cpu)
+
+-Attribute Dimensions and Total-
+[2, 64, 0]
+[0.05, 4, 32]
+Test MAE: 72.49 (69.89%)
+5m9s (cpu)
+
+[2, 64, 0]
+[0.05, 2, 16]
+Test MAE: 69.30 (66.30%)
+4m48s (cpu)
+
+[2, 64, 0]
+[0.05, 1, 8]
+Test MAE: 67.74 (66.69%)
+4m29s (cpu)
+
+-Hidden Dimensions-
+[2, 32, 0]
+[0.05, 1, 8]
+Test MAE: 77.33 (74.77%)
+2m3s (cpu)
+
+[2, 128, 0.05]
+[0.05, 2, 16]
+Test MAE: 65.12 (63.00%)
+10m4s (cpu)
+
+-Dropout-
+[2, 64, 0.5]
+[0.05, 2, 16]
+Test MAE: 72.29 (70.47%)
+5m25s (cpu)
+
+[2, 64, 0.25]
+[0.05, 2, 16]
+Test MAE: 70.04 (68.05%)
+5m28s (cpu)
+
+[2, 64, 0.1]
+[0.05, 2, 16]
+Test MAE: 66.93 (64.26%)
+5m6s (cpu)
+
+[2, 64, 0.05]
+[0.05, 2, 16]
+Test MAE: 63.70 (62.31%)
+5m15s (cpu)
