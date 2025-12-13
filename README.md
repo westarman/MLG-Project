@@ -72,14 +72,15 @@ State of the raw dataset before pre-processing:
 | odsek | regional attribute identifier |
 | sestoj | smallest forest unit, the node itself |
 | povrsina [ha] | area of the forest unit |
-| razvojna faza [11] | … |
-| gojitvena smer [21] | … |
-| zasnova [5] | … |
-| sklep [6] | … |
-| negovanost [5] | … |
+| razvojna faza [11] | mladovje, dvojni sloj, debeljak... |
+| gojitvena smer [21] | nega debeljaka, končni posek, ekocelica... |
+| zasnova [5] | bogata, pomankljiva... |
+| sklep [6] | normalen, rahel, tesen... |
+| negovanost [5] | nenegovan, pomankljivo negovan, negovan sestoj... |
 | površina pomladka [ha] | … |
-| pomladek zasnova [5] | … |
+| pomladek zasnova [5] | slaba, dobra, bogata... |
 | sestava gozda | jelke[%], bukve[%], mehki listavci[%] … |
+| sestava mladja | jelke_m[%], bukve_m[%], mehki listavci_m[%] … |
 | zaloga iglavcev [m^3] | trenutna zaloga iglavcev v sestoju |
 | zaloga listavcev [m^3] | trenutna zaloga listavcev v sestoju |
 | posek iglavcev | naš prediction! 0-15000 |
@@ -127,5 +128,6 @@ ___
 - [ ] dobro bi blo tut vključit podatke območij z lubadarjem, vetrolomom, požarom... Te podatki so very scattered za različna časovna obdobja, treba si pogledat če se da to uporabit iz geometrijskih podatkov
 - [X] ~~treba raziskat kateri model bi bil najbolj učinkovit za naš problem, sj njbrž bo njbulš, da več različnih modelov nrdimo z modifikacijami~~
 - [X] ~~basic model GraphSAGE~~ 
-- [ ] dodelaj GraphSAGE, da vključi sestavo gozda in attribute odsekov
+- [X] ~~dodelaj GraphSAGE, da vključi sestavo gozda~~
+- [ ] vključi še attribute odsekov
 - [ ] basic model GAT (al pa kerga druzga)
