@@ -45,20 +45,20 @@ State of the raw dataset before pre-processing:
 | povrsina[ha] | area in hectars |
 | gojitveni razred ggo [125] | needs to be double checked and IDs to be fixed |
 | gojitveni razred gge [455] | this one needs serious clean up as well as ID fixes |
-| kategorija gozda [4] | needs only the 0-th index |
-| ohranjenost gozda [4] | needs only the 0-th index |
-| polozaj pokrajine [4] | needs only the 0-th index |
-| relief [9] | needs only the 0-th index |
+| kategorija gozda [4] | večnamenski, GPN brez ukrepov, varovalni... |
+| ohranjenost gozda [4] | ohranjeni, spremenjeni... |
+| polozaj pokrajine [4] | ravnina, pobočje, greben, vznožje |
+| relief [9] | grebenasto, vrtačastvo, kotanjastvo... |
 | lega [9] | cardinal direction of the slope (S, J, V, Z, SZ, JV...) |
 | nagib[˚] | steepness |
 | nadm. višina[m] (min,max) | min and max altitude |
-| kamnina [39] | 0th fix - apnenec, dolomit, fliš, diluvialna ilovica... |
+| kamnina [39] | apnenec, dolomit, fliš, diluvialna ilovica... |
 | delež kamnitosti[%] | delež kamnine, ki je označen zgoraj (preveri) |
 | delež skalovitosti[%] | delež skalovja, ki pokriva tla |
 | tarife drevesnih vrst[%] | kakovost dreves oz. nek rank |
 | odprtost[%] | odprtost zaradi vlak (vlaka = gozdna "cesta") |
 | odprtost za gurs | to baje vključuje odprtost zarad vlak in cest nasplošno (preveri) |
-| pozarna ogrozenost [5] | needs only the 0-th index |
+| pozarna ogrozenost [5] | majhna ogroženost, srednja ogroženost... |
 | intenzivnost gospodarjenja [6] | small-intensity, medium-intensity... |
 | rastiščni tip [129] | needs serious clean up as well as ID fixes |
 | rastiščni koeficient | check what this value means |
