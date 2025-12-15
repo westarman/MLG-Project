@@ -100,3 +100,15 @@ Test MAE: 66.93 (64.26%)
 [0.05, 2, 16]
 Test MAE: 63.70 (62.31%)
 5m15s (cpu)
+
+
+NEW GEN (attribute encoder is learnable):
+
+[2,64,0.05]
+[0.025,dynamic and no final mlp, 30]
+Test MAE by target range (per bucket):
+Low  (≤ 0.00)  MAE: 20.40  | count = 12980
+Mid               MAE: 18.50  | count = 14781
+High (≥ 105.00) MAE: 89.08  | count = 6973
+Overall test MAE (weighted) = 33.38
+1m48s (gpu) - 300 epochs
