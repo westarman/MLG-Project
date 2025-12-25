@@ -1,0 +1,165 @@
+Table Enota {
+  gge INTEGER [pk]
+  gge_naziv TEXT
+  ggo INTEGER
+}
+
+Table Obmocje {
+  ggo INTEGER [pk]
+  ggo_naziv TEXT
+}
+
+Table Krajevna_Enota {
+  ke INTEGER [pk]
+  ke_naziv TEXT
+  ggo INTEGER
+}
+
+Table Revir {
+  revir INTEGER [pk]
+  revir_naziv TEXT
+  ggo INTEGER
+  ke INTEGER
+}
+
+
+Table Relief {
+  odsek TEXT 
+
+  relief INTEGER
+  lega INTEGER
+  nagib INTEGER
+
+  s_nadmorska_visina INTEGER
+  z_nadmorska_visina INTEGER
+
+  kamnina INTEGER
+  delez_kamnitosti INTEGER
+  delez_skalovitosti INTEGER
+
+  odprtost INTEGER
+  odprt_gurs REAL
+}
+
+
+Table Tarife {
+  odsek TEXT
+
+  tarifa_smreka INTEGER
+  tarifa_jelka INTEGER
+  tarifa_ostali_iglavci INTEGER
+
+  tarifa_bukev INTEGER
+  tarifa_hrast INTEGER
+  tarifa_plemeneniti_listavci INTEGER
+  tarifa_trdi_listavci INTEGER
+  tarifa_mehki_listavci INTEGER
+}
+
+Table Odsek {
+  odsek TEXT [pk]
+
+  ggo INTEGER
+  gge INTEGER
+  ke INTEGER
+  revir INTEGER
+
+  povrsina REAL
+
+  gojitveni_razred_ggo INTEGER
+  gojitveni_razred_gge INTEGER
+
+  kategorija_gozd INTEGER
+  ohranjenost_gozda INTEGER
+  polozaj_pokrajine INTEGER
+
+  pozar_ogrozenost INTEGER
+  intenzivnost_gospodarjenja INTEGER
+
+  rastiscni_tip INTEGER
+  rastiscni_koeficient INTEGER
+
+  vezani_ogljik REAL
+  letni_ponor_ogljika REAL
+}
+
+Table Sestoj {
+  sestoj TEXT [pk]
+
+  ggo INTEGER
+  odsek TEXT
+
+  povrsina REAL
+
+  razvojna_faza INTEGER
+  gojitvena_smer INTEGER
+
+  zasnova TEXT
+  sklep TEXT
+  negovanost TEXT
+
+  pomladek_ha REAL
+  pomladek_zasnova INTEGER
+
+  zaloga_iglavcev REAL
+  zaloga_listavcev REAL
+  zaloga_skupno REAL
+
+  posek_iglavcev INTEGER
+  posek_listavcev INTEGER
+  posek_skupno INTEGER
+}
+
+Table Sestava_Gozda {
+  sestoj TEXT
+
+  smreka11 REAL
+  smreka11_m REAL
+
+  jelka21 REAL
+  jelka21_m REAL
+
+  bor30 REAL
+  bor30_m REAL
+
+  macesen34 REAL
+  macesen34_m REAL
+
+  iglavci39 REAL
+  iglavci39_m REAL
+
+  bukev41 REAL
+  bukev41_m REAL
+
+  hrast51 REAL
+  hrast51_m REAL
+
+  pListavci60 REAL
+  pListavci60_m REAL
+
+  tListavci70 REAL
+  tListavci70_m REAL
+
+  mListavci80 REAL
+  mListavci80_m REAL
+}
+
+
+Ref: Enota.ggo > Obmocje.ggo
+Ref: Krajevna_Enota.ggo > Obmocje.ggo
+Ref: Revir.ggo > Obmocje.ggo
+Ref: Revir.ke > Krajevna_Enota.ke
+
+Ref: Odsek.ggo > Obmocje.ggo
+Ref: Odsek.gge > Enota.gge
+Ref: Odsek.ke > Krajevna_Enota.ke
+Ref: Odsek.revir > Revir.revir
+
+Ref: Relief.odsek > Odsek.odsek
+Ref: Tarife.odsek > Odsek.odsek
+
+Ref: Sestoj.odsek > Odsek.odsek
+Ref: Obmocje.ggo < Sestoj.ggo
+
+Ref: Sestava_Gozda.sestoj > Sestoj.sestoj
+

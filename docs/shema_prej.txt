@@ -1,0 +1,158 @@
+Table odseki_attr {
+  odsek TEXT [pk]
+  ogc_fid INTEGER
+  GEOMETRY TEXT
+
+  ggo INTEGER
+  ggo_naziv TEXT
+
+  povrsina REAL
+
+  gge INTEGER
+  gge_naziv TEXT
+
+  ke INTEGER
+  ke_naziv TEXT
+
+  revir INTEGER
+  revir_naziv TEXT
+
+  rgr_ggo INTEGER
+  rgr_ggo_naziv TEXT
+
+  rgr_gge INTEGER
+  rgr_gge_naziv TEXT
+
+  katgozd INTEGER
+  katgozd_naziv TEXT
+
+  ohranjen INTEGER
+  ohranjen_naziv TEXT
+
+  polpokr INTEGER
+  polpokr_naziv TEXT
+
+  relief INTEGER
+  relief_naziv TEXT
+
+  lega INTEGER
+  lega_naziv TEXT
+
+  nagib INTEGER
+
+  nvod INTEGER
+  nvdo INTEGER
+
+  kamnina INTEGER
+  kamnina_naziv TEXT
+
+  kamnit INTEGER
+  skalnat INTEGER
+
+  tarifa_sm INTEGER
+  tarifa_je INTEGER
+  tarifa_oi INTEGER
+  tarifa_bu INTEGER
+  tarifa_hr INTEGER
+  tarifa_pl INTEGER
+  tarifa_tl INTEGER
+  tarifa_ml INTEGER
+
+  spravilo INTEGER
+  spravilo_naziv TEXT
+
+  razdalja INTEGER
+  odprtost INTEGER
+  odprt_gurs REAL
+
+  pozar INTEGER
+  pozar_naziv TEXT
+
+  intgosp INTEGER
+  intgosp_naziv TEXT
+
+  krajime TEXT
+
+  grt1 INTEGER
+  grt1_naziv TEXT
+
+  rk INTEGER
+  rk_gurs INTEGER
+
+  carb_tot_t REAL
+  ponor_c REAL
+}
+Table sestoji_attr {
+  id INTEGER [pk]
+  node_id TEXT
+  GEOMETRY TEXT
+
+  ggo INTEGER
+  ggo_naziv TEXT
+
+  odsek TEXT
+  sestoj TEXT
+
+  povrsina REAL
+
+  rfaza INTEGER
+  rfaza_naziv TEXT
+
+  lzskdv11 REAL
+  lzskdv11_m REAL
+
+  lzskdv21 REAL
+  lzskdv21_m REAL
+
+  lzskdv30 REAL
+  lzskdv30_m REAL
+
+  lzskdv34 REAL
+  lzskdv34_m REAL
+
+  lzskdv39 REAL
+  lzskdv39_m REAL
+
+  lzskdv41 REAL
+  lzskdv41_m REAL
+
+  lzskdv50 REAL
+  lzskdv50_m REAL
+
+  lzskdv60 REAL
+  lzskdv60_m REAL
+
+  lzskdv70 REAL
+  lzskdv70_m REAL
+
+  lzskdv80 REAL
+  lzskdv80_m REAL
+
+  sksmerni INTEGER
+  sksmerni_naziv TEXT
+
+  zasnova TEXT
+  zasnova_naziv TEXT
+
+  sklep TEXT
+  sklep_naziv TEXT
+
+  negovan TEXT
+  negovanost_naziv TEXT
+
+  pompov REAL
+
+  pomzas INTEGER
+  pomzas_naziv TEXT
+
+  lzigl REAL
+  lzlst REAL
+  lzsku REAL
+
+  etigl INTEGER
+  etlst INTEGER
+  etsku INTEGER
+}
+
+
+Ref: "sestoji_attr"."odsek" > "odseki_attr"."odsek"
