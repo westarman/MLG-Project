@@ -1,114 +1,296 @@
-[number of layers | hidden dimensions | dropout probability] 
-[learning rate | attribute dimensions | total attribute dimensions]
+Hyperparameter(default):
+-data points...
 
-5 numeric attributes
-6 categorical attributes
-100 epochs - adam
-!-lower learning rate benefits from more epochs
+--------------------------------
 
--Learning Rate-
-[2, 64, 0]
-[0.01, 8, 64]
-Test MAE: 84.44 (81.90%)
-6m33s (cpu)
-
-[2, 64, 0]
-[0.025, 8, 64]
-Test MAE: 83.48 (80.90%)
-6m29s (cpu)
-
-[2, 64, 0]
-[0.05, 8, 64]
-Test MAE: 70.09 (68.14%)
-6m30s (cpu)
-
-[2, 64, 0]
-[0.1, 8, 64]
-Test MAE: 71.28 (69.24%)
-6m7s (cpu)
-
-[2, 64, 0]
-[0.2, 8, 64]
-Test MAE: 75.92 (73.37%)
-6m29s (cpu)
-
--Layers-
-[3, 64, 0]
-[0.05, 8, 64]
-Test MAE: 79.87 (77.22%)
-9m48s (cpu)
-
-[4, 32, 0]
-[0.05, 1, 8]
-Test MAE: 85.49 (82.46%)
-4m42s (cpu)
-
-[1, 64, 0]
-[0.05, 1, 8]
-Test MAE: 75.11 (72.30%)
-1m25s (cpu)
-
-[3, 64, 0.05]
-[0.05, 2, 16]
-Test MAE: 80.11 (78.64%)
-8m19s (cpu)
-
--Attribute Dimensions and Total-
-[2, 64, 0]
-[0.05, 4, 32]
-Test MAE: 72.49 (69.89%)
-5m9s (cpu)
-
-[2, 64, 0]
-[0.05, 2, 16]
-Test MAE: 69.30 (66.30%)
-4m48s (cpu)
-
-[2, 64, 0]
-[0.05, 1, 8]
-Test MAE: 67.74 (66.69%)
-4m29s (cpu)
-
--Hidden Dimensions-
-[2, 32, 0]
-[0.05, 1, 8]
-Test MAE: 77.33 (74.77%)
-2m3s (cpu)
-
-[2, 128, 0.05]
-[0.05, 2, 16]
-Test MAE: 65.12 (63.00%)
-10m4s (cpu)
-
--Dropout-
-[2, 64, 0.5]
-[0.05, 2, 16]
-Test MAE: 72.29 (70.47%)
-5m25s (cpu)
-
-[2, 64, 0.25]
-[0.05, 2, 16]
-Test MAE: 70.04 (68.05%)
-5m28s (cpu)
-
-[2, 64, 0.1]
-[0.05, 2, 16]
-Test MAE: 66.93 (64.26%)
-5m6s (cpu)
-
-[2, 64, 0.05]
-[0.05, 2, 16]
-Test MAE: 63.70 (62.31%)
-5m15s (cpu)
+Hidden Dim(64):
 
 
-NEW GEN (attribute encoder is learnable):
+Layers(2):
+---1 layer---
+(1)
+Test MAE: 27.07
+etigl Overall MAE: 24.54
+Low      [0, 0]: MAE = 3.73 | count = 9685
+Mid      [0, 546]: MAE = 12.58 | count = 18100
+High     [546, 1225]: MAE = 43.61 | count = 3475
+Very High[1225, 30823]: MAE = 125.74 | count = 3474
+etlst Overall MAE: 29.61
+Low      [0, 13]: MAE = 5.07 | count = 7037
+Mid      [13, 801]: MAE = 15.66 | count = 20744
+High     [801, 1532]: MAE = 53.95 | count = 3479
+Very High[1532, 60993]: MAE = 138.25 | count = 3474
 
-[2,64,0.05]
-[0.025,dynamic and no final mlp, 30]
-Test MAE by target range (per bucket):
-Low  (≤ 0.00)  MAE: 20.40  | count = 12980
-Mid               MAE: 18.50  | count = 14781
-High (≥ 105.00) MAE: 89.08  | count = 6973
-Overall test MAE (weighted) = 33.38
-1m48s (gpu) - 300 epochs
+(2)
+Test MAE: 28.35
+etigl Overall MAE: 25.46
+Low      [0, 0]: MAE = 5.70 | count = 9685
+Mid      [0, 546]: MAE = 12.87 | count = 18100
+High     [546, 1225]: MAE = 44.64 | count = 3475
+Very High[1225, 30823]: MAE = 126.89 | count = 3474
+etlst Overall MAE: 31.25
+Low      [0, 13]: MAE = 8.01 | count = 7037
+Mid      [13, 801]: MAE = 17.14 | count = 20744
+High     [801, 1532]: MAE = 53.85 | count = 3479
+Very High[1532, 60993]: MAE = 139.94 | count = 3474
+
+(3)
+Test MAE: 27.66
+etigl Overall MAE: 25.03
+Low      [0, 0]: MAE = 4.98 | count = 9685
+Mid      [0, 546]: MAE = 13.04 | count = 18100
+High     [546, 1225]: MAE = 43.82 | count = 3475
+Very High[1225, 30823]: MAE = 124.58 | count = 3474
+etlst Overall MAE: 30.30
+Low      [0, 13]: MAE = 7.50 | count = 7037
+Mid      [13, 801]: MAE = 16.05 | count = 20744
+High     [801, 1532]: MAE = 53.67 | count = 3479
+Very High[1532, 60993]: MAE = 138.09 | count = 3474
+
+(4)
+Test MAE: 27.13
+etigl Overall MAE: 24.31
+Low      [0, 0]: MAE = 4.26 | count = 9685
+Mid      [0, 546]: MAE = 12.13 | count = 18100
+High     [546, 1225]: MAE = 44.04 | count = 3475
+Very High[1225, 30823]: MAE = 123.95 | count = 3474
+etlst Overall MAE: 29.94
+Low      [0, 13]: MAE = 6.16 | count = 7037
+Mid      [13, 801]: MAE = 16.13 | count = 20744
+High     [801, 1532]: MAE = 53.16 | count = 3479
+Very High[1532, 60993]: MAE = 137.33 | count = 3474
+
+(5)
+Test MAE: 27.38
+TEST — etigl | bucketed by lzigl
+Overall MAE: 24.77
+Low      [0, 0]: MAE = 4.67 | count = 9685
+Mid      [0, 546]: MAE = 12.31 | count = 18100
+High     [546, 1225]: MAE = 44.23 | count = 3475
+Very High[1225, 30823]: MAE = 126.27 | count = 3474
+TEST — etlst | bucketed by lzlst
+Overall MAE: 29.99
+Low      [0, 13]: MAE = 6.36 | count = 7037
+Mid      [13, 801]: MAE = 15.92 | count = 20744
+High     [801, 1532]: MAE = 53.62 | count = 3479
+Very High[1532, 60993]: MAE = 138.17 | count = 3474
+
+---2 layers (DEFAULT)---
+(1) 
+Test MAE: 25.84
+etigl
+Overall MAE: 22.63
+Low      [0, 0]: MAE = 0.62 | count = 9685
+Mid      [0, 546]: MAE = 11.82 | count = 18100
+High     [546, 1225]: MAE = 43.73 | count = 3475
+Very High[1225, 30823]: MAE = 119.14 | count = 3474
+etlst Overall MAE: 29.06
+Low      [0, 13]: MAE = 1.05 | count = 7037
+Mid      [13, 801]: MAE = 15.72 | count = 20744
+High     [801, 1532]: MAE = 54.62 | count = 3479
+Very High[1532, 60993]: MAE = 139.85 | count = 3474
+
+(2)
+Test MAE: 26.36
+etigl Overall MAE: 23.40
+Low      [0, 0]: MAE = 0.28 | count = 9685
+Mid      [0, 546]: MAE = 12.78 | count = 18100
+High     [546, 1225]: MAE = 45.45 | count = 3475
+Very High[1225, 30823]: MAE = 121.09 | count = 3474
+etlst Overall MAE: 29.33
+Low      [0, 13]: MAE = 0.69 | count = 7037
+Mid      [13, 801]: MAE = 16.30 | count = 20744
+High     [801, 1532]: MAE = 55.60 | count = 3479
+Very High[1532, 60993]: MAE = 138.85 | count = 3474
+
+(3)
+Test MAE: 26.62
+etigl Overall MAE: 23.66
+Low      [0, 0]: MAE = 0.21 | count = 9685
+Mid      [0, 546]: MAE = 13.32 | count = 18100
+High     [546, 1225]: MAE = 44.95 | count = 3475
+Very High[1225, 30823]: MAE = 121.60 | count = 3474
+etlst Overall MAE: 29.59
+Low      [0, 13]: MAE = 0.59 | count = 7037
+Mid      [13, 801]: MAE = 17.07 | count = 20744
+High     [801, 1532]: MAE = 54.59 | count = 3479
+Very High[1532, 60993]: MAE = 138.04 | count = 3474
+
+(4)
+Test MAE: 26.14
+etigl Overall MAE: 23.21
+Low      [0, 0]: MAE = 1.14 | count = 9685
+Mid      [0, 546]: MAE = 12.17 | count = 18100
+High     [546, 1225]: MAE = 45.35 | count = 3475
+Very High[1225, 30823]: MAE = 120.08 | count = 3474
+etlst Overall MAE: 29.08
+Low      [0, 13]: MAE = 0.50 | count = 7037
+Mid      [13, 801]: MAE = 16.10 | count = 20744
+High     [801, 1532]: MAE = 54.22 | count = 3479
+Very High[1532, 60993]: MAE = 139.33 | count = 3474
+
+(5)
+Test MAE: 26.60
+etigl Overall MAE: 23.39
+Low      [0, 0]: MAE = 1.72 | count = 9685
+Mid      [0, 546]: MAE = 11.95 | count = 18100
+High     [546, 1225]: MAE = 45.17 | count = 3475
+Very High[1225, 30823]: MAE = 121.63 | count = 3474
+etlst Overall MAE: 29.81
+Low      [0, 13]: MAE = 1.54 | count = 7037
+Mid      [13, 801]: MAE = 16.27 | count = 20744
+High     [801, 1532]: MAE = 55.99 | count = 3479
+Very High[1532, 60993]: MAE = 141.69 | count = 3474
+
+---3 Layers---
+(1)
+Test MAE: 27.93
+etigl Overall MAE: 25.25
+Low      [0, 0]: MAE = 5.06 | count = 9685
+Mid      [0, 546]: MAE = 13.31 | count = 18100
+High     [546, 1225]: MAE = 46.46 | count = 3475
+Very High[1225, 30823]: MAE = 122.54 | count = 3474
+etlst Overall MAE: 30.61
+Low      [0, 13]: MAE = 7.69 | count = 7037
+Mid      [13, 801]: MAE = 15.80 | count = 20744
+High     [801, 1532]: MAE = 55.09 | count = 3479
+Very High[1532, 60993]: MAE = 140.91 | count = 3474
+
+(2)
+Test MAE: 28.72
+etigl Overall MAE: 25.71
+Low      [0, 0]: MAE = 5.03 | count = 9685
+Mid      [0, 546]: MAE = 13.49 | count = 18100
+High     [546, 1225]: MAE = 46.95 | count = 3475
+Very High[1225, 30823]: MAE = 125.85 | count = 3474
+etlst Overall MAE: 31.72
+Low      [0, 13]: MAE = 8.29 | count = 7037
+Mid      [13, 801]: MAE = 16.61 | count = 20744
+High     [801, 1532]: MAE = 55.84 | count = 3479
+Very High[1532, 60993]: MAE = 145.23 | count = 3474
+
+(3)
+Test MAE: 28.08
+etigl Overall MAE: 25.14
+Low      [0, 0]: MAE = 4.86 | count = 9685
+Mid      [0, 546]: MAE = 13.51 | count = 18100
+High     [546, 1225]: MAE = 46.03 | count = 3475
+Very High[1225, 30823]: MAE = 121.39 | count = 3474
+etlst Overall MAE: 31.01
+Low      [0, 13]: MAE = 8.05 | count = 7037
+Mid      [13, 801]: MAE = 16.09 | count = 20744
+High     [801, 1532]: MAE = 55.50 | count = 3479
+Very High[1532, 60993]: MAE = 142.08 | count = 3474
+
+(4)
+Test MAE: 27.69
+etigl Overall MAE: 25.24
+Low      [0, 0]: MAE = 5.10 | count = 9685
+Mid      [0, 546]: MAE = 13.71 | count = 18100
+High     [546, 1225]: MAE = 45.78 | count = 3475
+Very High[1225, 30823]: MAE = 120.89 | count = 3474
+etlst Overall MAE: 30.15
+Low      [0, 13]: MAE = 6.20 | count = 7037
+Mid      [13, 801]: MAE = 15.90 | count = 20744
+High     [801, 1532]: MAE = 54.77 | count = 3479
+Very High[1532, 60993]: MAE = 139.07 | count = 3474
+
+(5)
+Test MAE: 27.40
+etigl Overall MAE: 24.23
+Low      [0, 0]: MAE = 0.15 | count = 9685
+Mid      [0, 546]: MAE = 14.30 | count = 18100
+High     [546, 1225]: MAE = 45.27 | count = 3475
+Very High[1225, 30823]: MAE = 122.13 | count = 3474
+etlst Overall MAE: 30.57
+Low      [0, 13]: MAE = 6.92 | count = 7037
+Mid      [13, 801]: MAE = 15.99 | count = 20744
+High     [801, 1532]: MAE = 55.57 | count = 3479
+Very High[1532, 60993]: MAE = 140.51 | count = 3474
+
+---4 Layers---
+(1)
+Test MAE: 28.83
+etigl Overall MAE: 25.94
+Low      [0, 0]: MAE = 5.58 | count = 9685
+Mid      [0, 546]: MAE = 13.88 | count = 18100
+High     [546, 1225]: MAE = 47.95 | count = 3475
+Very High[1225, 30823]: MAE = 123.48 | count = 3474
+etlst Overall MAE: 31.73
+Low      [0, 13]: MAE = 10.27 | count = 7037
+Mid      [13, 801]: MAE = 16.95 | count = 20744
+High     [801, 1532]: MAE = 54.87 | count = 3479
+Very High[1532, 60993]: MAE = 140.30 | count = 3474
+
+(2)
+Test MAE: 28.53
+etigl Overall MAE: 25.68
+Low      [0, 0]: MAE = 6.02 | count = 9685
+Mid      [0, 546]: MAE = 14.05 | count = 18100
+High     [546, 1225]: MAE = 44.83 | count = 3475
+Very High[1225, 30823]: MAE = 121.92 | count = 3474
+etlst Overall MAE: 31.38
+Low      [0, 13]: MAE = 8.37 | count = 7037
+Mid      [13, 801]: MAE = 17.06 | count = 20744
+High     [801, 1532]: MAE = 55.40 | count = 3479
+Very High[1532, 60993]: MAE = 139.45 | count = 3474
+
+(3)
+Test MAE: 29.13
+etigl Overall MAE: 26.09
+Low      [0, 0]: MAE = 5.45 | count = 9685
+Mid      [0, 546]: MAE = 13.93 | count = 18100
+High     [546, 1225]: MAE = 47.68 | count = 3475
+Very High[1225, 30823]: MAE = 125.36 | count = 3474
+etlst Overall MAE: 32.17
+Low      [0, 13]: MAE = 10.74 | count = 7037
+Mid      [13, 801]: MAE = 16.82 | count = 20744
+High     [801, 1532]: MAE = 54.76 | count = 3479
+Very High[1532, 60993]: MAE = 144.60 | count = 3474
+
+(4)
+Test MAE: 28.75
+etigl Overall MAE: 26.24
+Low      [0, 0]: MAE = 4.68 | count = 9685
+Mid      [0, 546]: MAE = 15.20 | count = 18100
+High     [546, 1225]: MAE = 47.09 | count = 3475
+Very High[1225, 30823]: MAE = 123.02 | count = 3474
+etlst Overall MAE: 31.25
+Low      [0, 13]: MAE = 8.63 | count = 7037
+Mid      [13, 801]: MAE = 16.68 | count = 20744
+High     [801, 1532]: MAE = 54.11 | count = 3479
+Very High[1532, 60993]: MAE = 141.20 | count = 3474
+
+(5)
+Test MAE: 28.71
+TEST — etigl | bucketed by lzigl
+Overall MAE: 25.52
+Low      [0, 0]: MAE = 5.89 | count = 9685
+Mid      [0, 546]: MAE = 13.71 | count = 18100
+High     [546, 1225]: MAE = 45.77 | count = 3475
+Very High[1225, 30823]: MAE = 121.57 | count = 3474
+
+TEST — etlst | bucketed by lzlst
+Overall MAE: 31.90
+Low      [0, 13]: MAE = 9.15 | count = 7037
+Mid      [13, 801]: MAE = 17.21 | count = 20744
+High     [801, 1532]: MAE = 55.21 | count = 3479
+Very High[1532, 60993]: MAE = 142.34 | count = 3474
+
+data = [
+    (1, 27.07), (1, 28.35), (1, 27.66), (1, 27.13), (1, 27.38),
+    (2, 25.84), (2, 26.34), (2, 26.62), (2, 26.14), (2, 26.6),
+    (3, 27.93), (3, 28.72), (3, 28.08), (3, 27.69), (3, 27.4),
+    (4, 28.83), (4, 28.53), (4, 29.13), (4, 28.75), (4, 28.71), 
+]
+
+Epochs(1000):
+
+
+Dropout(0.1):
+
+
+Encoder strat(i/2):
+
+
+Learning rate(0.02):

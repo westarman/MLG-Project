@@ -3,3 +3,7 @@
 adjacency_db.sqlite
 forest_db.sqlite
 mlg-env
+convert.py
+forest_db_rgcn.sqlite
+best_forest_rgcn.pt
+rgcn_sim.py
