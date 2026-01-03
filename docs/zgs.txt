@@ -1,6 +1,4 @@
 GGO > Krajevne enote > GGE > Revirji > Odseki > Sestoji
-(GGE je pred Krajevno enoto, čeprf je manjši??)
-
 
 PODATKI IZ PREGLEDOVALNIKA
 Na nivoju Odseka:
@@ -23,7 +21,7 @@ Na nivoju Odseka:
     -delež skalovitosti[%]
     -nagib[˚]
     -odprtost[%]
-    -odprtost za gurs??? <- kj je to? (čuje se pomembno)
+    -odprtost za gurs
     -relief
     -lega
 
@@ -44,13 +42,20 @@ Na nivoju Sestoja:
     -posek iglavcev <- naš prediction
     -posek listavcev <- naš prediction
 
-Dodamo še sosednost:
-    -sosednji k-sestoji (najverjetnje bo max k=2-3 in bo treba embedding nrdit iz njihovih tabel)
-    -(mogoč dodamo sosednost na nivoju odseka in celo revirja, za gge je pa njbrz ze overkill)
-
-
 DB processing:
     1) load sestoji layer into QGIS from WFS in Pregledovalnik
     2) we use REFACTOR from the toolbox to isolate sestoji identifiers
     3) we use JOIN ATTR. BY LOCATION from toolbox on the identifiers layer (touches)
     4) in sqlite browser we open the db with the joined layer and create new nodes, edges, isolate nodes, tables (remember to delete self edges!)
+
+Prediction visualisation:
+    NOTEBOOK:
+    1) train and save the model and its data split (or just use the preset)
+    2) export model predictions as csv
+    QGIS:
+    1) load WFS layer sestoji from ZGS website
+    2) open field calculator (abacus top right) 
+       and make a new column with concat("ggo",'_',"odsek",'',"sestoj")
+    3) add csv from notebook as a text delimiter layer (set as no geometry)
+    4) under properties of the loaded layer add a join on "node_id" with the notebook csv layer
+    5) now you can manipulate the symbols for visualisation
